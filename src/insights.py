@@ -2,9 +2,9 @@ from src import jobs
 
 
 def get_unique_job_types(path):
-    jobs_list = jobs.read(path)
+    all_jobs = jobs.read(path)
     jobs_categories = []
-    for job in jobs_list:
+    for job in all_jobs:
         if job["job_type"] in jobs_categories:
             pass
         else:
@@ -32,18 +32,17 @@ def filter_by_job_type(jobs, job_type):
 
 
 def get_unique_industries(path):
-    industries_list = jobs.read(path)
-    industries_categories = []
-    for job in industries_list:
-        if job["industry"] in industries_categories:
+    all_jobs = jobs.read(path)
+    industries_list = []
+    for job in all_jobs:
+        if job["industry"] in industries_list:
             pass
-        elif job["industry"] == '':
+        elif job["industry"] == "":
             pass
         else:
-            industries_categories.append(job["industry"])
+            industries_list.append(job["industry"])
 
-    return industries_categories
-    return []
+    return industries_list
 
 
 def filter_by_industry(jobs, industry):
@@ -65,38 +64,27 @@ def filter_by_industry(jobs, industry):
 
 
 def get_max_salary(path):
-    """Get the maximum salary of all jobs
-
-    Must call `read`
-
-    Parameters
-    ----------
-    path : str
-        Must be passed to `read`
-
-    Returns
-    -------
-    int
-        The maximum salary paid out of all job opportunities
-    """
-    pass
+    all_jobs = jobs.read(path)
+    salairies_list = []
+    for job in all_jobs:
+        if job["max_salary"]:
+            try:
+                salairies_list.append(int(job["max_salary"]))
+            except ValueError:
+                continue
+    return max(salairies_list)
 
 
 def get_min_salary(path):
-    """Get the minimum salary of all jobs
-
-    Must call `read`
-
-    Parameters
-    ----------
-    path : str
-        Must be passed to `read`
-
-    Returns
-    -------
-    int
-        The minimum salary paid out of all job opportunities
-    """
+    all_jobs = jobs.read(path)
+    salairies_list = []
+    for job in all_jobs:
+        if job["min_salary"]:
+            try:
+                salairies_list.append(int(job["min_salary"]))
+            except ValueError:
+                continue
+    return min(salairies_list)
     pass
 
 
