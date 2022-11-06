@@ -10,6 +10,3 @@ def read(path):
         for row in jobs_file:
             result.append(row)
     return result
-
-
-print(read("src/jobs.csv"))
