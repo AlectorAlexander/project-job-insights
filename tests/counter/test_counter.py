@@ -5,4 +5,4 @@ def test_counter():
     path = "src/jobs.csv"
     word = "Python"
     counter = count_ocurrences(path, word)
-    assert counter == 1570
+    assert counter == 1639
